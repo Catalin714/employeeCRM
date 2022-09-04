@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +28,12 @@ public class Departament {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="dept_no")
+    @Column(name = "dept_no")
+    @Size(min=4,max=4)
 	private String id;
     
-    @Column(name="dept_name")
+    @Column(name="dept_name", length = 40)
+    @UniqueElements
     private String departamentName;
     
     

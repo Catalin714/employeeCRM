@@ -3,15 +3,18 @@ package selflearning.crm.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -20,10 +23,7 @@ import lombok.Setter;
 
 
 @Entity
-@Getter
-@Setter
 @Table(name="employees")
-@NoArgsConstructor
 public class Employee {
 
 	
@@ -37,27 +37,41 @@ public class Employee {
 		private LocalDate birthDate;
 		
 	    @NotNull
-	    @Column(name="first_name")
+	    @Column(name="first_name", length = 16)
 		private String firstName;
 		
 	    @NotNull
-	   @Column(name="last_name")
+	    @Column(name="last_name", length = 16)
 		private String lastName;
 		
-	   @NotNull
-	   @Column(name="gender")
+	    @NotNull
+	    @Column(name="gender")
 		private String gender;
 		
-	   @NotNull
-	   @Column(name="hire_date")
+	    @NotNull
+	    @Column(name="hire_date")
 		private LocalDate hireDate;
 	
-       @OneToMany
-       @JoinColumn(name="emp_no", referencedColumnName="emp_no")
-       List<DepartamentManager> departamentManagers;
+        @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+        @JoinColumn(name="emp_no", referencedColumnName="emp_no")
+        List<DepartamentManager> departamentManagers;
 
+        @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+        @JoinColumn(name="emp_no", referencedColumnName="emp_no")
+        List<Salary> salaries;
+       
+        @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+        @JoinColumn(name="emp_no", referencedColumnName="emp_no")
+        List<Title> titles;
+       
+
+	
+       
+       
+       
 	public Employee(@NotNull LocalDate birthDate, @NotNull String firstName, @NotNull String lastName,
-			@NotNull String gender, @NotNull LocalDate hireDate, List<DepartamentManager> departamentManagers) {
+			@NotNull String gender, @NotNull LocalDate hireDate, List<DepartamentManager> departamentManagers,
+			List<Salary> salaries, List<Title> titles) {
 		super();
 		this.birthDate = birthDate;
 		this.firstName = firstName;
@@ -65,6 +79,16 @@ public class Employee {
 		this.gender = gender;
 		this.hireDate = hireDate;
 		this.departamentManagers = departamentManagers;
+		this.salaries = salaries;
+		this.titles = titles;
+	}
+
+	public List<Salary> getSalaries() {
+		return salaries;
+	}
+
+	public void setSalaries(List<Salary> salaries) {
+		this.salaries = salaries;
 	}
 
 	public Employee() {
@@ -116,6 +140,14 @@ public class Employee {
 
 	public void setDepartamentManagers(List<DepartamentManager> departamentManagers) {
 		this.departamentManagers = departamentManagers;
+	}
+
+	public List<Title> getTitles() {
+		return titles;
+	}
+
+	public void setTitles(List<Title> titles) {
+		this.titles = titles;
 	}
 	
 

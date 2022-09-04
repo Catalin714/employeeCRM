@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import selflearning.crm.compositekey.DepartamentManagerId;
 
 @Entity
 @Table(name="dept_manager")
