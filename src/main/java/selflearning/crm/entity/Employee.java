@@ -69,19 +69,23 @@ public class Employee {
        
        
        
+
+
+
+
 	public Employee(@NotNull LocalDate birthDate, @NotNull String firstName, @NotNull String lastName,
-			@NotNull String gender, @NotNull LocalDate hireDate, List<DepartamentManager> departamentManagers,
-			List<Salary> salaries, List<Title> titles) {
-		super();
-		this.birthDate = birthDate;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gender = gender;
-		this.hireDate = hireDate;
-		this.departamentManagers = departamentManagers;
-		this.salaries = salaries;
-		this.titles = titles;
-	}
+				@NotNull String gender, @NotNull LocalDate hireDate, List<DepartamentManager> departamentManagers,
+				List<Salary> salaries, List<Title> titles) {
+			super();
+			this.birthDate = birthDate;
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.gender = gender;
+			this.hireDate = hireDate;
+			this.departamentManagers = departamentManagers;
+			this.salaries = salaries;
+			this.titles = titles;
+		}
 
 	public List<Salary> getSalaries() {
 		return salaries;
@@ -149,7 +153,7 @@ public class Employee {
 	public void setTitles(List<Title> titles) {
 		this.titles = titles;
 	}
-	
+
 
 
 	
