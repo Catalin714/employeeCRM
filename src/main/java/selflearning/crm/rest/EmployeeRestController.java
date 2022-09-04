@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import selflearning.crm.entity.Employee;
@@ -23,9 +26,9 @@ public class EmployeeRestController {
 	EmployeeService employeeService;
 	
 	@GetMapping("/employees")
-	public List<Employee> getEmployees() {
-		
-		return employeeService.getEmployees();
+	public Page<Employee> getEmployees(@RequestParam int page, @RequestParam int size) {
+		PageRequest pr = PageRequest.of(page, size);
+		return employeeService.getEmployees(pr);
 		
 	}
 	

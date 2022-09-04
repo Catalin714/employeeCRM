@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import selflearning.crm.dao.EmployeeRepository;
@@ -18,8 +21,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	
 	@Override
-	public List<Employee> getEmployees() {
-		return employeeRepository.findAll();
+	public Page <Employee> getEmployees(PageRequest pageRequest) {
+		return employeeRepository.findAll(pageRequest);
 	}
 
 	
